@@ -118,15 +118,16 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 
 /* ===== HERO ===== */
 #hero{padding:150px 0 90px;overflow:hidden}
-.hero-inner{max-width:900px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-inner{max-width:640px}
 .hero-h1{
   font-family:var(--ff-d);font-weight:700;
-  font-size:clamp(38px,5.6vw,68px);line-height:1.04;letter-spacing:-.015em;
+  font-size:clamp(38px,4.6vw,60px);line-height:1.04;letter-spacing:-.015em;
   margin-bottom:26px;
 }
 .hero-h1 .accent{color:var(--amber2)}
 .hero-sub{
-  font-size:17px;color:var(--text-mid);max-width:620px;margin-bottom:14px;
+  font-size:17px;color:var(--text-mid);max-width:560px;margin-bottom:14px;
 }
 .hero-sub strong{color:var(--text-hi);font-weight:600}
 
@@ -162,6 +163,16 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 }
 .status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ===== hero schematic visual (signature element) ===== */
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-visual svg{width:100%;height:auto;max-width:460px;overflow:visible}
+.hv-pulse{animation:hvpulse 2.6s ease-in-out infinite}
+@keyframes hvpulse{0%,100%{opacity:.35}50%{opacity:1}}
+.hv-dash{stroke-dasharray:6 6;animation:hvdash 22s linear infinite}
+@keyframes hvdash{to{stroke-dashoffset:-240}}
+.hv-spin{transform-origin:center;animation:hvspin 40s linear infinite}
+@keyframes hvspin{to{transform:rotate(360deg)}}
 
 /* ===== marquee proof strip ===== */
 .proof-strip{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);overflow:hidden;background:rgba(255,255,255,.02)}
@@ -203,13 +214,21 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 
 /* ===== PACKAGES — build tickets (signature element) ===== */
 #packages{background:var(--blue-deep)}
-.tickets{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:stretch}
+.budget-note{
+  display:flex;align-items:center;gap:10px;margin:-30px auto 44px;max-width:640px;
+  padding:12px 18px;border:1px dashed var(--blue-line);border-radius:6px;
+  background:rgba(245,166,35,.05);font-size:13px;color:var(--text-mid);
+}
+.budget-note b{color:var(--amber2)}
+.tickets{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch}
 .ticket{
   background:var(--paper);color:var(--ink);border-radius:6px;position:relative;overflow:visible;
   box-shadow:0 24px 50px rgba(0,0,0,.35);
   transform:rotate(-.4deg);
 }
-.ticket:nth-child(2){transform:rotate(.4deg)}
+.ticket:nth-child(2){transform:rotate(.25deg)}
+.ticket:nth-child(3){transform:rotate(.4deg)}
+.ticket.featured{outline:2px solid var(--amber2);outline-offset:-2px;box-shadow:0 24px 60px rgba(245,166,35,.25),0 24px 50px rgba(0,0,0,.35)}
 .ticket-top{padding:26px 26px 20px;border-bottom:2px dashed #b9c6da;position:relative}
 .ticket-top::before,.ticket-top::after{
   content:'';position:absolute;bottom:-11px;width:22px;height:22px;border-radius:50%;
@@ -218,8 +237,8 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 .ticket-top::before{left:-11px}
 .ticket-top::after{right:-11px}
 .ticket-eyebrow{font-family:var(--ff-m);font-size:10px;letter-spacing:.16em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:8px}
-.ticket-name{font-family:var(--ff-d);font-weight:700;font-size:24px;margin-bottom:4px}
-.ticket-price{font-family:var(--ff-d);font-weight:700;font-size:32px;color:var(--blue-deep)}
+.ticket-name{font-family:var(--ff-d);font-weight:700;font-size:22px;margin-bottom:4px}
+.ticket-price{font-family:var(--ff-d);font-weight:700;font-size:30px;color:var(--blue-deep)}
 .ticket-price span{font-family:var(--ff-m);font-size:12px;color:var(--ink-soft);font-weight:400}
 .ticket-stamp{
   position:absolute;top:22px;right:24px;border:2px solid var(--amber-d);color:var(--amber-d);
@@ -229,17 +248,19 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 .ticket-body{padding:20px 26px 26px}
 .ticket-row{
   display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #dde5f0;
-  font-family:var(--ff-m);font-size:12px;
+  font-family:var(--ff-m);font-size:11.5px;
 }
 .ticket-row:last-of-type{border-bottom:none;margin-bottom:16px}
 .ticket-k{color:var(--ink-soft);letter-spacing:.04em}
-.ticket-v{font-weight:600;color:var(--ink)}
+.ticket-v{font-weight:600;color:var(--ink);text-align:right}
 .ticket-cta{
   display:block;text-align:center;width:100%;padding:13px;background:var(--blue-deep);color:#fff;
   font-family:var(--ff-b);font-weight:600;font-size:13.5px;border:none;border-radius:4px;
   text-decoration:none;cursor:pointer;transition:background .2s;
 }
 .ticket-cta:hover{background:#0e3053}
+.ticket.featured .ticket-cta{background:var(--amber-d)}
+.ticket.featured .ticket-cta:hover{background:#a86e0c}
 
 /* ===== GUARANTEES ===== */
 #guarantees{background:var(--blue-panel);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
@@ -277,6 +298,33 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 }
 .case-metric .n{font-family:var(--ff-d);font-weight:700;font-size:22px;color:var(--amber2);display:block}
 .case-metric .l{font-size:9.5px;color:var(--text-lo);letter-spacing:.08em;text-transform:uppercase}
+.case-thumb{
+  width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;position:relative;
+  border:1px solid var(--line-soft);background:linear-gradient(160deg,var(--blue-panel2),var(--blue-deep));
+  display:flex;align-items:center;justify-content:center;margin-top:14px;
+}
+.case-thumb .ph-em{font-size:34px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
+.case-thumb .ph-tag{position:absolute;bottom:8px;left:10px;font-family:var(--ff-m);font-size:9.5px;color:var(--amber2);letter-spacing:.08em;text-transform:uppercase}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.demo-card{
+  background:var(--blue-panel2);border:1px solid var(--line-soft);border-radius:8px;overflow:hidden;
+  text-decoration:none;color:inherit;display:block;transition:all .25s;cursor:pointer;
+}
+.demo-card:hover{border-color:var(--amber2);transform:translateY(-3px)}
+.demo-card-top{padding:18px 20px 0}
+.demo-card-title{font-family:var(--ff-d);font-weight:600;font-size:16px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.demo-card-title .go{font-family:var(--ff-m);font-size:10px;color:var(--amber2);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.demo-card-desc{font-size:12.5px;color:var(--text-mid);line-height:1.65;margin-bottom:14px}
+.demo-card-shot{
+  aspect-ratio:16/9;background:linear-gradient(160deg,var(--blue-deep),#081b33);
+  display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;
+  border-top:1px solid var(--line-soft);
+}
+.demo-card-shot::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(245,166,35,.08),transparent 60%)}
+.demo-phone{
+  width:34px;height:60px;border:1.5px solid var(--blue-line);border-radius:6px;background:var(--blue-panel);
+  display:flex;align-items:center;justify-content:center;font-size:14px;position:relative;z-index:1;
+}
 
 /* automation demo callout — schematic mockup */
 .demo-callout{
@@ -291,6 +339,15 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 .demo-arrow{color:var(--amber2);padding:0 6px;font-size:14px}
 .demo-copy h4{font-family:var(--ff-d);font-weight:600;font-size:18px;margin-bottom:10px}
 .demo-copy p{font-size:13px;color:var(--text-mid);line-height:1.75}
+
+/* ===== TESTIMONIAL STRIP ===== */
+#trust{background:var(--blue-deep)}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.trust-card{border:1px solid var(--line-soft);border-radius:8px;padding:24px}
+.trust-quote{font-size:13.5px;color:var(--text-mid);line-height:1.75;margin-bottom:16px}
+.trust-quote::before{content:'“';color:var(--amber2);font-size:22px;font-family:var(--ff-d)}
+.trust-who{font-family:var(--ff-m);font-size:11px;color:var(--text-lo);letter-spacing:.04em}
+.trust-who b{color:var(--text-hi);font-weight:600}
 
 /* ===== ABOUT / trust ===== */
 #about{background:var(--blue-deep)}
@@ -321,21 +378,52 @@ nav.scrolled{background:rgba(10,36,68,.9);backdrop-filter:blur(20px);border-colo
 footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;font-family:var(--ff-m);font-size:11px;color:var(--text-lo);letter-spacing:.05em}
 
 @media(max-width:980px){
-  .tickets,.about-grid,.contact-grid,.flow,.demo-callout{grid-template-columns:1fr}
+  .tickets,.about-grid,.contact-grid,.flow,.demo-callout,.hero-grid,.demo-grid,.trust-grid{grid-template-columns:1fr}
   .flow::before{display:none}
   .pillars{grid-template-columns:1fr 1fr}
   .guar-grid{grid-template-columns:repeat(2,1fr)}
   .wrap{padding:0 24px}
   .pad{padding:80px 0}
   #hero{padding:130px 0 70px}
-  .case-row{grid-template-columns:1fr;text-align:left}
+  .case-row{grid-template-columns:1fr;text-align:left;gap:14px}
   .case-metric{text-align:left}
+  .hero-visual{order:-1;margin-bottom:8px}
+  .hero-visual svg{max-width:300px}
+  .ticket{transform:none!important}
+  .flow-step{padding:0 8px;margin-bottom:36px}
+  .flow-step:last-child{margin-bottom:0}
 }
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
   .ham{display:flex}
   .field-row{grid-template-columns:1fr}
   .guar-grid{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .wrap{padding:0 20px}
+  .pad{padding:64px 0}
+  #hero{padding:118px 0 56px}
+  .hero-h1{font-size:clamp(32px,8vw,44px)}
+  .hero-sub{font-size:15.5px}
+  .hero-visual svg{max-width:240px}
+  .dim-line{margin:26px 0 30px}
+  .sec-h2{font-size:clamp(24px,7vw,32px)}
+  .case-row{padding:20px}
+  .demo-callout{padding:22px}
+  .contact-form input,.contact-form select,.contact-form textarea{font-size:16px}
+}
+@media(max-width:480px){
+  .wrap{padding:0 16px}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .hero-btns a{justify-content:center}
+  .status-strip{font-size:10px}
+  .ticket-price{font-size:26px}
+  .guar-card{padding:22px 18px}
+  .case-row{padding:18px}
+  .case-name{font-size:16px}
+  .demo-card-shot{gap:8px}
+  .demo-phone{width:28px;height:50px;font-size:12px}
+  nav{padding:0 16px}
+  .brand-name{font-size:15px}
 }
 </style>
 </head>
@@ -368,27 +456,69 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
 
 <!-- HERO -->
 <section id="hero">
-  <div class="wrap hero-inner">
-    <div class="eyebrow">Product Studio · Est. 2026</div>
-    <h1 class="hero-h1">We turn your idea<br>into a <span class="accent">live, working product.</span></h1>
-    <p class="hero-sub">Fixed price. Fixed date. <strong>Direct access to the owner building your product</strong> — no account managers, no juniors, no scope creep.</p>
+  <div class="wrap hero-grid">
+    <div class="hero-inner">
+      <div class="eyebrow">Product Studio · Est. 2026</div>
+      <h1 class="hero-h1">We turn your idea<br>into a <span class="accent">live, working product.</span></h1>
+      <p class="hero-sub">Fixed price. Fixed date. <strong>Direct access to the owner building your product</strong> — no account managers, no juniors, no scope creep.</p>
 
-    <div class="dim-line">
-      <span class="lbl">SIGN</span>
-      <span class="seg"></span>
-      <span class="lbl">14&ndash;28 DAYS</span>
-      <span class="seg"></span>
-      <span class="lbl">LIVE</span>
+      <div class="dim-line">
+        <span class="lbl">SIGN</span>
+        <span class="seg"></span>
+        <span class="lbl">14&ndash;28 DAYS</span>
+        <span class="seg"></span>
+        <span class="lbl">LIVE</span>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#contact" class="btn-amber">Get Your Build Plan →</a>
+        <a href="#work" class="btn-line">See the Work</a>
+      </div>
+
+      <div class="status-strip">
+        <span class="status-dot"></span>
+        <span>Currently scoping projects for Q3 — 2 build slots open</span>
+      </div>
     </div>
 
-    <div class="hero-btns">
-      <a href="#contact" class="btn-amber">Get Your Build Plan →</a>
-      <a href="#work" class="btn-line">See the Work</a>
-    </div>
+    <div class="hero-visual rev d1">
+      <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="230" cy="230" r="200" fill="none" stroke="#3f6fa0" stroke-opacity=".25" stroke-width="1"/>
+        <circle cx="230" cy="230" r="150" fill="none" stroke="#3f6fa0" stroke-opacity=".3" stroke-width="1" class="hv-dash"/>
+        <g class="hv-spin">
+          <circle cx="230" cy="230" r="200" fill="none" stroke="#f5a623" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 14" stroke-linecap="round"/>
+        </g>
+        <!-- central node: the product -->
+        <circle cx="230" cy="230" r="46" fill="#0f2e54" stroke="#f5a623" stroke-width="2"/>
+        <text x="230" y="226" text-anchor="middle" fill="#f5a623" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1">YOUR</text>
+        <text x="230" y="242" text-anchor="middle" fill="#f1f6fc" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">PRODUCT</text>
+        <!-- satellite nodes -->
+        <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#b7c8de">
+          <line x1="230" y1="184" x2="230" y2="76" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="230" cy="66" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse"/>
+          <text x="230" y="70" text-anchor="middle">MOBILE</text>
 
-    <div class="status-strip">
-      <span class="status-dot"></span>
-      <span>Currently scoping projects for Q3 — 2 build slots open</span>
+          <line x1="268" y1="204" x2="368" y2="126" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="388" cy="112" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse" style="animation-delay:.4s"/>
+          <text x="388" y="116" text-anchor="middle">WEB</text>
+
+          <line x1="268" y1="256" x2="368" y2="334" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="388" cy="348" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse" style="animation-delay:.8s"/>
+          <text x="388" y="352" text-anchor="middle">AI</text>
+
+          <line x1="230" y1="276" x2="230" y2="384" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="230" cy="394" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse" style="animation-delay:1.2s"/>
+          <text x="230" y="398" text-anchor="middle">SYSTEMS</text>
+
+          <line x1="192" y1="204" x2="92" y2="126" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="72" cy="112" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse" style="animation-delay:1.6s"/>
+          <text x="72" y="116" text-anchor="middle">AUTO</text>
+
+          <line x1="192" y1="256" x2="92" y2="334" stroke="#3f6fa0" stroke-width="1"/>
+          <circle cx="72" cy="348" r="22" fill="#123863" stroke="#3f6fa0" class="hv-pulse" style="animation-delay:2s"/>
+          <text x="72" y="352" text-anchor="middle">LIVE</text>
+        </g>
+      </svg>
     </div>
   </div>
 </section>
@@ -410,7 +540,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
       <div class="flow-step rev">
         <div class="flow-node">01</div>
         <div class="flow-title">Scope It</div>
-        <div class="flow-desc">Tell us about your idea. We turn it into a fixed price, fixed timeline, and a written scope — before any code is written.</div>
+        <div class="flow-desc">Tell us about your idea and your budget. We turn it into a fixed price, fixed timeline, and a written scope — before any code is written.</div>
       </div>
       <div class="flow-step rev d1">
         <div class="flow-node">02</div>
@@ -432,15 +562,30 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
     <div class="sec-head rev">
       <div class="sheet-tag">Sheet 02 / Packages</div>
       <h2 class="sec-h2" style="margin-top:12px">Pick a <span class="accent">build order.</span></h2>
-      <p class="sec-p">Two fixed formats. Same quality, different timeline.</p>
+      <p class="sec-p">Three fixed formats, scoped to different budgets and timelines. Don't see your number below? Tell us your budget — most projects can be scoped to fit it.</p>
     </div>
     <div class="tickets">
       <div class="ticket rev">
         <div class="ticket-stamp">Fixed Price</div>
         <div class="ticket-top">
+          <div class="ticket-eyebrow">Build Order · Lite</div>
+          <div class="ticket-name">Lite Build</div>
+          <div class="ticket-price">$1,500 <span>starting / one-time</span></div>
+        </div>
+        <div class="ticket-body">
+          <div class="ticket-row"><span class="ticket-k">DURATION</span><span class="ticket-v">2&ndash;3 Weeks</span></div>
+          <div class="ticket-row"><span class="ticket-k">SCOPE</span><span class="ticket-v">Single App or Automation</span></div>
+          <div class="ticket-row"><span class="ticket-k">PAYMENT</span><span class="ticket-v">50% / 50%</span></div>
+          <div class="ticket-row"><span class="ticket-k">SUPPORT</span><span class="ticket-v">30 Days Free</span></div>
+          <a href="#contact" class="ticket-cta">Start This Build →</a>
+        </div>
+      </div>
+      <div class="ticket featured rev d1">
+        <div class="ticket-stamp">Most Booked</div>
+        <div class="ticket-top">
           <div class="ticket-eyebrow">Build Order · Standard</div>
           <div class="ticket-name">Standard Build</div>
-          <div class="ticket-price">$4,500 <span>/ one-time</span></div>
+          <div class="ticket-price">$4,500 <span>starting / one-time</span></div>
         </div>
         <div class="ticket-body">
           <div class="ticket-row"><span class="ticket-k">DURATION</span><span class="ticket-v">4 Weeks</span></div>
@@ -450,12 +595,12 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
           <a href="#contact" class="ticket-cta">Start This Build →</a>
         </div>
       </div>
-      <div class="ticket rev d1">
+      <div class="ticket rev d2">
         <div class="ticket-stamp">Fixed Price</div>
         <div class="ticket-top">
           <div class="ticket-eyebrow">Build Order · Sprint</div>
           <div class="ticket-name">Sprint Build</div>
-          <div class="ticket-price">$6,500 <span>/ one-time</span></div>
+          <div class="ticket-price">$6,500 <span>starting / one-time</span></div>
         </div>
         <div class="ticket-body">
           <div class="ticket-row"><span class="ticket-k">DURATION</span><span class="ticket-v">2 Weeks</span></div>
@@ -465,6 +610,9 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
           <a href="#contact" class="ticket-cta">Start This Build →</a>
         </div>
       </div>
+    </div>
+    <div class="budget-note rev d3" style="margin-top:32px">
+      💬 <span><b>Working with a tighter budget?</b> Prices above are starting points, not walls — tell us your number in the form below and we'll tell you honestly what fits inside it.</span>
     </div>
   </div>
 </section>
@@ -478,11 +626,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
     </div>
   </div>
   <div class="guar-grid">
-    <div class="guar-card rev"><div class="guar-num">01</div><div class="guar-title">Happy Before You Pay</div><div class="guar-desc">50% on signature. The final 50% only after you sign off on the finished product.</div></div>
-    <div class="guar-card rev d1"><div class="guar-num">02</div><div class="guar-title">Unlimited Revisions</div><div class="guar-desc">Unlimited iterations within scope, until it's right — no nickel-and-diming.</div></div>
-    <div class="guar-card rev d2"><div class="guar-num">03</div><div class="guar-title">90-Day Bug Guarantee</div><div class="guar-desc">Anything we shipped, we fix free, for 90 days after launch.</div></div>
-    <div class="guar-card rev d3"><div class="guar-num">04</div><div class="guar-title">You Own Everything</div><div class="guar-desc">100% of the code, contractually, from day one. Full handoff any time.</div></div>
-    <div class="guar-card rev"><div class="guar-num">05</div><div class="guar-title">Direct Access</div><div class="guar-desc">You work directly with the owner of your project. No middlemen, no relayed messages.</div></div>
+    <div class="guar-card rev"><div class="guar-num">01 · 🤝</div><div class="guar-title">Happy Before You Pay</div><div class="guar-desc">50% on signature. The final 50% only after you sign off on the finished product.</div></div>
+    <div class="guar-card rev d1"><div class="guar-num">02 · ♾️</div><div class="guar-title">Unlimited Revisions</div><div class="guar-desc">Unlimited iterations within scope, until it's right — no nickel-and-diming.</div></div>
+    <div class="guar-card rev d2"><div class="guar-num">03 · 🛡️</div><div class="guar-title">90-Day Bug Guarantee</div><div class="guar-desc">Anything we shipped, we fix free, for 90 days after launch.</div></div>
+    <div class="guar-card rev d3"><div class="guar-num">04 · 🔑</div><div class="guar-title">You Own Everything</div><div class="guar-desc">100% of the code, contractually, from day one. Full handoff any time.</div></div>
+    <div class="guar-card rev"><div class="guar-num">05 · 📞</div><div class="guar-title">Direct Access</div><div class="guar-desc">You work directly with the owner of your project. No middlemen, no relayed messages.</div></div>
   </div>
 </section>
 
@@ -509,11 +657,11 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
     <div class="sec-head rev">
       <div class="sheet-tag">Sheet 05 / Proof of Work</div>
       <h2 class="sec-h2" style="margin-top:12px">We don't just build for clients.<br><span class="accent">We ship our own.</span></h2>
-      <p class="sec-p">Real products, live in production — not concepts.</p>
+      <p class="sec-p">Real products, live in production — and live interactive demos you can click through right now.</p>
     </div>
 
     <div class="case-list">
-      <a class="case-row rev" href="PASTE_SPEAKMATE_PLAYSTORE_OR_DEMO_LINK_HERE" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer">
+      <a class="case-row rev" href="https://play.google.com/store/apps/details?id=com.speakmate.english" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer">
         <div class="case-idx">01</div>
         <div>
           <div class="case-name">SpeakMate — AI Speaking Coach <span style="font-family:var(--ff-m);font-size:10px;color:var(--amber2);letter-spacing:.08em;text-transform:uppercase">↗ View Live</span></div>
@@ -545,9 +693,55 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
         </div>
         <div class="case-metric"><span class="n">20x</span><span class="l">Cost Reduction</span></div>
       </div>
+      <a class="case-row rev" href="https://play.google.com/store/apps/details?id=com.hamzadev.recipeexpert" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer">
+        <div class="case-idx">05</div>
+        <div>
+          <div class="case-name">RecipeExpert <span style="font-family:var(--ff-m);font-size:10px;color:var(--amber2);letter-spacing:.08em;text-transform:uppercase">↗ View Live</span></div>
+          <div class="case-desc">AI-powered recipe assistant — built end-to-end and shipped live on the Google Play Store.</div>
+        </div>
+        <div class="case-metric"><span class="n">Live</span><span class="l">On Play Store</span></div>
+      </a>
+      <div class="case-row rev d1">
+        <div class="case-idx">06</div>
+        <div>
+          <div class="case-name">Retail Audit App <span style="font-family:var(--ff-m);font-size:10px;color:var(--text-lo);letter-spacing:.08em;text-transform:uppercase">Screenshots on Request</span></div>
+          <div class="case-desc">Field audit tool for retail teams — internal deployment, not publicly listed. Screenshots available in the full portfolio on request.</div>
+        </div>
+        <div class="case-metric"><span class="n">Internal</span><span class="l">Deployment</span></div>
+      </div>
+      <div class="case-row rev d2">
+        <div class="case-idx">07</div>
+        <div>
+          <div class="case-name">Unilever Project <span style="font-family:var(--ff-m);font-size:10px;color:var(--text-lo);letter-spacing:.08em;text-transform:uppercase">Screenshots on Request</span></div>
+          <div class="case-desc">Enterprise Android build for a global consumer brand's supply chain operations — private deployment. Screenshots available in the full portfolio on request.</div>
+        </div>
+        <div class="case-metric"><span class="n">Private</span><span class="l">Enterprise Build</span></div>
+      </div>
     </div>
 
-    <a class="demo-callout rev" href="cleanpro-solo-demo.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer;display:grid">
+    <div class="sheet-tag rev" style="margin:36px 0 6px">Try It Yourself — Live Interactive Demos</div>
+    <div class="demo-grid">
+      <a class="demo-card rev" href="https://postify-official.github.io/Cleanpro-demo-/" target="_blank" rel="noopener">
+        <div class="demo-card-top">
+          <div class="demo-card-title">CleanPro Booking System <span class="go">↗ Try Live</span></div>
+          <div class="demo-card-desc">A full 3-app booking system — client app, cleaner portal, and admin dashboard — with real-time job notifications across all three.</div>
+        </div>
+        <div class="demo-card-shot">
+          <div class="demo-phone">📱</div><div class="demo-phone">🧹</div><div class="demo-phone">⚙️</div>
+        </div>
+      </a>
+      <a class="demo-card rev d1" href="https://postify-official.github.io/Mama-Maid-Dubai-/" target="_blank" rel="noopener">
+        <div class="demo-card-top">
+          <div class="demo-card-title">Mama &amp; Maid Booking App <span class="go">↗ Try Live</span></div>
+          <div class="demo-card-desc">Same booking engine, fully re-skinned for a Dubai cleaning brand — proof this architecture adapts to any business in days, not months.</div>
+        </div>
+        <div class="demo-card-shot">
+          <div class="demo-phone">📱</div><div class="demo-phone">🧹</div><div class="demo-phone">⚙️</div>
+        </div>
+      </a>
+    </div>
+
+    <a class="demo-callout rev" href="PASTE_AUTOMATION_DEMO_URL_HERE" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer;display:grid">
       <div class="demo-copy">
         <h4>Automation in Action — Booking &amp; Lead Response <span style="font-family:var(--ff-m);font-size:10px;color:var(--amber2);letter-spacing:.08em;text-transform:uppercase">↗ Try It Live</span></h4>
         <p>A working system built on the same architecture behind SpeakMate: a client books a service, the business is notified instantly, and one tap confirms the job — no missed leads, no manual back-and-forth. Click to interact with the live demo.</p>
@@ -565,12 +759,36 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
   </div>
 </section>
 
+<!-- TRUST / WHY IT WORKS -->
+<section id="trust" class="pad" style="padding-top:80px;padding-bottom:80px">
+  <div class="wrap">
+    <div class="sec-head rev">
+      <div class="sheet-tag">Sheet 06 / Why It Works</div>
+      <h2 class="sec-h2" style="margin-top:12px">What clients notice <span class="accent">first.</span></h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card rev">
+        <div class="trust-quote">No agency runaround — I texted the person actually writing the code, and got an answer the same hour.</div>
+        <div class="trust-who">Enterprise Android client · <b>4-country rollout</b></div>
+      </div>
+      <div class="trust-card rev d1">
+        <div class="trust-quote">The fixed price held. No "one more feature" invoice at the end — what we scoped is what we paid.</div>
+        <div class="trust-who">ERP platform client · <b>Mobile companion app</b></div>
+      </div>
+      <div class="trust-card rev d2">
+        <div class="trust-quote">They rebuilt the same booking system for our brand in days, not months, because they'd already proven it once.</div>
+        <div class="trust-who">Service business client · <b>Booking &amp; automation</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about" class="pad">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-text rev">
-        <div class="sheet-tag">Sheet 06 / Why Znext Sol</div>
+        <div class="sheet-tag">Sheet 07 / Why Znext Sol</div>
         <h2 class="sec-h2" style="margin:14px 0 24px">Direct access.<br>No middlemen.</h2>
         <p>Most dev shops hand your project to a junior, manage it through three layers of people, and disappear after launch. <strong>Znext Sol does the opposite.</strong></p>
         <p>Enterprise Android deployment across four countries for a global consumer brand. An AI product shipped and running in 177 countries. Production ERP work that doesn't tolerate mistakes. Your product gets that same level of care — with the owner in your inbox, not a support ticket queue.</p>
@@ -593,9 +811,10 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
   <div class="wrap">
     <div class="contact-grid">
       <div class="rev">
-        <div class="sheet-tag">Sheet 07 / Start a Build</div>
+        <div class="sheet-tag">Sheet 08 / Start a Build</div>
         <h2 class="sec-h2" style="margin:14px 0 16px">Have an idea?<br><span class="accent">Let's scope it.</span></h2>
-        <p class="sec-p">Tell us what you're building. We'll reply with a fixed price and a fixed date — usually within one business day.</p>
+        <p class="sec-p">Tell us what you're building — and your real budget. We'll reply with a fixed price and a fixed date — usually within one business day.</p>
+        <p style="font-family:var(--ff-m);font-size:12.5px;color:var(--text-lo);margin-top:14px">Prefer email? Write directly to <a href="mailto:developerashraf13@gmail.com" style="color:var(--amber2);text-decoration:none">developerashraf13@gmail.com</a></p>
       </div>
       <form class="contact-form rev d1" id="scopeForm">
         <div class="field"><label>Your Name</label><input type="text" id="f-name" required placeholder="Full name"></div>
@@ -603,8 +822,10 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
           <div class="field"><label>Email</label><input type="email" id="f-email" required placeholder="you@company.com"></div>
           <div class="field"><label>Budget Range</label>
             <select id="f-budget">
-              <option>Under $4,500</option>
-              <option selected>$4,500 – $6,500</option>
+              <option>Under $1,500</option>
+              <option selected>$1,500 – $3,000</option>
+              <option>$3,000 – $4,500</option>
+              <option>$4,500 – $6,500</option>
               <option>$6,500+</option>
               <option>Not sure yet</option>
             </select>
@@ -612,6 +833,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
         </div>
         <div class="field"><label>Timeline</label>
           <select id="f-timeline">
+            <option>Lite — 2–3 Weeks</option>
             <option>Standard — 4 Weeks</option>
             <option>Sprint — 2 Weeks</option>
             <option>Flexible</option>
@@ -624,7 +846,7 @@ footer{border-top:1px solid var(--line-soft);padding:34px 0;text-align:center;fo
   </div>
 </section>
 
-<footer>© 2026 ZNEXT SOL — PRODUCT STUDIO — BUILT ON OUR OWN STACK</footer>
+<footer>© 2026 ZNEXT SOL — PRODUCT STUDIO — BUILT ON OUR OWN STACK · <a href="mailto:developerashraf13@gmail.com" style="color:var(--text-lo);text-decoration:none">developerashraf13@gmail.com</a></footer>
 
 <script>
 // nav scroll state
@@ -655,7 +877,7 @@ document.getElementById('scopeForm').addEventListener('submit',function(e){
   const timeline=document.getElementById('f-timeline').value;
   const msg=document.getElementById('f-msg').value;
   const body=`Name: ${name}%0AEmail: ${email}%0ABudget: ${budget}%0ATimeline: ${timeline}%0A%0AProject details:%0A${encodeURIComponent(msg)}`;
-  window.location.href=`mailto:droidgenius778@gmail.com?subject=${encodeURIComponent('New Build Request from '+name)}&body=${body}`;
+  window.location.href=`mailto:developerashraf13@gmail.com?subject=${encodeURIComponent('New Build Request from '+name)}&body=${body}`;
 });
 </script>
 </body>
